@@ -1,8 +1,6 @@
 ## IPO 정보에 대한 REST API 서버
 |Version Info| [![Python](https://img.shields.io/pypi/pyversions/zipline-reloaded.svg?cacheSeconds=2592000")](https://pypi.python.org/pypi/zipline-reloaded)|
 |----|----|
-
-
 ![사진](https://media.vlpt.us/images/poiuyy0420/post/c8d8fd01-0a25-4866-aa3a-11ccc70d66af/d_rest.png)
 
 
