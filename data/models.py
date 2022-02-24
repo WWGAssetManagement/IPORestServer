@@ -14,7 +14,7 @@ class DemandForecastModel(models.Model):
     name = models.CharField(max_length=20, primary_key=True)
     ipo_price = models.IntegerField(null=True)
     ipo_value = models.IntegerField()
-    security = models.CharField(max_length=20)
+    security = models.CharField(max_length=40, null=True)
     demand_forecast_start = models.DateField(db_index=True)
     demand_forecast_end = models.DateField(db_index=True)
     hope_price_min = models.IntegerField()
