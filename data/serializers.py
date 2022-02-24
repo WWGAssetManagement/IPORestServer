@@ -14,3 +14,5 @@ class DemandForecastSerializer(serializers.ModelSerializer):
                   'hope_price_min',
                   'hope_price_max',
                   )
+
+

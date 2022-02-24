@@ -34,3 +34,11 @@ class DemandForecastDetailView(APIView):
         data = self.get_object(name)
         serializer = DemandForecastSerializer(data)
         return Response(serializer.data)
+
+    def put(self, request, name, format=None):
+        data = self.get_object(name)
+        serializer = DemandForecastSerializer(data, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
