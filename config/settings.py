@@ -31,6 +31,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     # Custom Apps
     'rest_framework',
+    'data',
     # Default Apps
     'django.contrib.admin',
     'django.contrib.auth',
