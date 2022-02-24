@@ -7,6 +7,10 @@ from rest_framework import status
 
 # Create your views here.
 class DemandForecastView(APIView):
+    """
+    전체 수요예측 일정
+    """
+
     def get(self, request):
         datas = DemandForecastModel.objects.all()
         serializer = DemandForecastSerializer(datas, many=True)
@@ -24,6 +28,10 @@ class DemandForecastView(APIView):
 
 
 class DemandForecastDetailView(APIView):
+    """
+    종목당 수요예측 일정
+    """
+
     def get_object(self, name):
         try:
             return DemandForecastModel.objects.get(name=name)
@@ -42,3 +50,10 @@ class DemandForecastDetailView(APIView):
             serializer.save()
             return Response(serializer.data)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DemandForecastInProgress(APIView):
+    def get(self, request):
+        datas = DemandForecastModel.objects.filter(ipo_price=None).all()
+        serializer = DemandForecastSerializer(datas, many=True)
+        return Response(serializer.data)
