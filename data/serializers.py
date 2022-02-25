@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import DemandForecastModel
+from .models import DemandForecastModel, IPOScheduleModel
 
 
 class DemandForecastSerializer(serializers.ModelSerializer):
@@ -16,3 +16,7 @@ class DemandForecastSerializer(serializers.ModelSerializer):
                   )
 
 
+class IPOScheduleSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = IPOScheduleModel
+        fields = "__all__"

@@ -19,3 +19,14 @@ class DemandForecastModel(models.Model):
     demand_forecast_end = models.DateField(db_index=True)
     hope_price_min = models.IntegerField()
     hope_price_max = models.IntegerField()
+
+
+class IPOScheduleModel(models.Model):
+    name = models.CharField(max_length=20, primary_key=True)
+    ipo_price = models.IntegerField(null=True)
+    security = models.CharField(max_length=40, null=True)
+    ipo_start = models.DateField(db_index=True)
+    ipo_end = models.DateField(db_index=True)
+    hope_price_min = models.IntegerField()
+    hope_price_max = models.IntegerField()
+    competition_rate = models.FloatField(null=True)
