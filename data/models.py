@@ -30,3 +30,10 @@ class IPOScheduleModel(models.Model):
     hope_price_min = models.IntegerField()
     hope_price_max = models.IntegerField()
     competition_rate = models.FloatField(null=True)
+
+
+class DCInsideTitleModel(models.Model):
+    title = models.CharField(max_length=50, primary_key=True)
+    url = models.TextField(null=True)
+    add_date = models.DateTimeField(auto_now=True)
+
