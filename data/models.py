@@ -37,3 +37,8 @@ class DCInsideTitleModel(models.Model):
     url = models.TextField(null=True)
     add_date = models.DateTimeField(auto_now=True)
 
+
+class DCInsideDetailModel(models.Model):
+    title = models.ForeignKey(DCInsideTitleModel, on_delete=models.CASCADE)
+    date_time = models.DateTimeField(db_index=True)
+    content = models.TextField(null=True)

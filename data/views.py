@@ -1,5 +1,15 @@
-from .serializers import DemandForecastSerializer, IPOScheduleSerializer, DCInsideTitleSerializer
-from .models import DemandForecastModel, IPOScheduleModel, DCInsideTitleModel
+from .serializers import (
+    DemandForecastSerializer,
+    IPOScheduleSerializer,
+    DCInsideTitleSerializer,
+    DCInsideDetailSerializer,
+)
+from .models import (
+    DemandForecastModel,
+    IPOScheduleModel,
+    DCInsideTitleModel,
+    DCInsideDetailModel
+)
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
@@ -106,25 +116,22 @@ class DCInsideTitleView(viewsets.ModelViewSet):
     queryset = DCInsideTitleModel.objects.all()
     serializer_class = DCInsideTitleSerializer
 
-    # def create(self, request, *args, **kwargs):
-    # Row 하나씩 업데이트
-    #     data = request.data
-    #     serializer = self.get_serializer(data=data)
-    #     if serializer.is_valid():
-    #         headers = self.get_success_headers(data=data)
-    #         serializer.save()
-    #         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
-    #     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
     def create(self, request, *args, **kwargs):
-        # 한꺼번에 Insert
+        # Row 하나씩 업데이트
         data = request.data
-        serializer = self.get_serializer(data=data, many=True)
-        serializer.is_valid()
-        self.perform_create(serializer)
-        headers = self.get_success_headers(data=data)
-        serializer.save()
-        return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        serializer = self.get_serializer(data=data)
+        if serializer.is_valid():
+            headers = self.get_success_headers(data=data)
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def perform_create(self, serializer):
         serializer.save()
+
+
+class DCInsideDetailView(viewsets.ModelViewSet):
+    queryset = DCInsideDetailModel.objects.all()
+    serializer_class = DCInsideDetailSerializer
+
+

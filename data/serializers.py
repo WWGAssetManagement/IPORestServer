@@ -3,6 +3,7 @@ from .models import (
     DemandForecastModel,
     IPOScheduleModel,
     DCInsideTitleModel,
+    DCInsideDetailModel,
 )
 
 
@@ -30,3 +31,9 @@ class DCInsideTitleSerializer(serializers.ModelSerializer):
     class Meta:
         model = DCInsideTitleModel
         fields = ('title', 'url')
+
+
+class DCInsideDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DCInsideDetailModel
+        fields = ('title', 'date_time', 'content')
