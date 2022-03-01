@@ -17,25 +17,50 @@ from rest_framework import viewsets
 
 
 # Create your views here.
-class DemandForecastView(APIView):
+class DemandForecastView(viewsets.ModelViewSet):
     """
     전체 수요예측 일정
     """
 
-    def get(self, request):
-        datas = DemandForecastModel.objects.all()
-        serializer = DemandForecastSerializer(datas, many=True)
-        return Response(serializer.data)
+    queryset = DemandForecastModel.objects.all()
+    serializer_class = DemandForecastSerializer
 
-    def post(self, request):
-        serializer = DemandForecastSerializer(data=request.data)
+    def is_exists(self, name):
+        try:
+            DemandForecastModel.objects.get(name=name)
+            return True
+        except DemandForecastModel.DoesNotExist:
+            return False
+
+    def get_ipo_price(self, name):
+        return DemandForecastModel.objects.values_list('ipo_price').get(name=name)[0]
+
+    def create(self, request, *args, **kwargs):
+        data = request.data
+        serializer = self.get_serializer(data=data)
+        name = data.get('name')
+
+        if self.is_exists(name):
+            db_ipo_price = self.get_ipo_price(name)
+            current_ipo_price = data.get('ipo_price')
+            # ipo price 값이 달리지면 변경
+            if db_ipo_price == 0:
+                    model = DemandForecastModel.objects.get(name=name)
+                    model.ipo_price = current_ipo_price
+                    model.save()
+
         if serializer.is_valid():
+            headers = self.get_success_headers(data=data)
             serializer.save()
             return Response({
-                'name': request.data['name'],
-                'response': True
-            })
-        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+                'result': True,
+                'response': serializer.data,
+            }, status=status.HTTP_201_CREATED, headers=headers)
+
+        return Response({
+            'result': False,
+            'response': serializer.errors,
+        }, status=status.HTTP_400_BAD_REQUEST)
 
 
 class DemandForecastDetailView(APIView):
@@ -133,5 +158,3 @@ class DCInsideTitleView(viewsets.ModelViewSet):
 class DCInsideDetailView(viewsets.ModelViewSet):
     queryset = DCInsideDetailModel.objects.all()
     serializer_class = DCInsideDetailSerializer
-
-

@@ -14,10 +14,13 @@ router = DefaultRouter()
 router.register('title', DCInsideTitleView)
 router.register('detail', DCInsideDetailView)
 
+demand_router = DefaultRouter()
+demand_router.register('forecast', DemandForecastView)
+
 # 참고 사이트: https://berkbach.com/restful-api-in-django-16fc3fb1a238
 # 참고 사이트: https://proglish.tistory.com/53
 urlpatterns = [
-    path('demand/forecast', DemandForecastView.as_view()),
+    path('demand/', include(demand_router.urls)),
     path('demand/forecast/detail/<str:name>', DemandForecastDetailView.as_view()),
     path('demand/forecast/inprogress', DemandForecastInProgressView.as_view()),
     path('ipo/shedule', IPOScheduleView.as_view()),
