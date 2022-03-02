@@ -3,12 +3,14 @@ from .serializers import (
     IPOScheduleSerializer,
     DCInsideTitleSerializer,
     DCInsideDetailSerializer,
+    NaverTrendSearchSerializer,
 )
 from .models import (
     DemandForecastModel,
     IPOScheduleModel,
     DCInsideTitleModel,
-    DCInsideDetailModel
+    DCInsideDetailModel,
+    NaverTrendSearchModel,
 )
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -158,3 +160,8 @@ class DCInsideTitleView(viewsets.ModelViewSet):
 class DCInsideDetailView(viewsets.ModelViewSet):
     queryset = DCInsideDetailModel.objects.all()
     serializer_class = DCInsideDetailSerializer
+
+
+class NaverTrendSearchView(viewsets.ModelViewSet):
+    queryset = NaverTrendSearchModel.objects.all()
+    serializer_class = NaverTrendSearchSerializer

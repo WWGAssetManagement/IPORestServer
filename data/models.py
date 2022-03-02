@@ -42,3 +42,12 @@ class DCInsideDetailModel(models.Model):
     title = models.ForeignKey(DCInsideTitleModel, on_delete=models.CASCADE)
     date_time = models.DateTimeField(db_index=True)
     content = models.TextField(null=True)
+
+
+class NaverTrendSearchModel(models.Model):
+    date = models.DateField()
+    ratio = models.FloatField()
+    company = models.CharField(max_length=25)
+
+    class Meta:
+        unique_together = (('date', 'company'),)

@@ -4,6 +4,7 @@ from .models import (
     IPOScheduleModel,
     DCInsideTitleModel,
     DCInsideDetailModel,
+    NaverTrendSearchModel,
 )
 
 
@@ -37,3 +38,9 @@ class DCInsideDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = DCInsideDetailModel
         fields = ('title', 'date_time', 'content')
+
+
+class NaverTrendSearchSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NaverTrendSearchModel
+        fields = "__all__"
