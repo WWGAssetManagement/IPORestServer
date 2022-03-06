@@ -21,6 +21,23 @@ class DemandForecastModel(models.Model):
     hope_price_max = models.IntegerField()
 
 
+class DemandForecastResultModel(models.Model):
+    """
+    DemandForecast에서
+    hold_rate: 의무보유 확약 %
+    institutional_competition_rate: 기관 경쟁률
+    """
+    company = models.CharField(max_length=20, primary_key=True)
+    demand_forecast_date = models.DateField(null=True, db_index=True)
+    ipo_price = models.IntegerField()
+    ipo_value = models.IntegerField()
+    institutional_competition_rate = models.FloatField()
+    hold_rate = models.FloatField()
+    security = models.CharField(max_length=20)
+    hope_price_min = models.IntegerField()
+    hope_price_max = models.IntegerField()
+
+
 class IPOScheduleModel(models.Model):
     name = models.CharField(max_length=20, primary_key=True)
     ipo_price = models.IntegerField(null=True)
