@@ -1,5 +1,6 @@
 from .serializers import (
     DemandForecastSerializer,
+    DemandForecastResultSerializer,
     IPOScheduleSerializer,
     DCInsideTitleSerializer,
     DCInsideDetailSerializer,
@@ -7,6 +8,7 @@ from .serializers import (
 )
 from .models import (
     DemandForecastModel,
+    DemandForecastResultModel,
     IPOScheduleModel,
     DCInsideTitleModel,
     DCInsideDetailModel,
@@ -47,9 +49,9 @@ class DemandForecastView(viewsets.ModelViewSet):
             current_ipo_price = data.get('ipo_price')
             # ipo price 값이 달리지면 변경
             if db_ipo_price == 0:
-                    model = DemandForecastModel.objects.get(name=name)
-                    model.ipo_price = current_ipo_price
-                    model.save()
+                model = DemandForecastModel.objects.get(name=name)
+                model.ipo_price = current_ipo_price
+                model.save()
 
         if serializer.is_valid():
             headers = self.get_success_headers(data=data)
@@ -63,6 +65,11 @@ class DemandForecastView(viewsets.ModelViewSet):
             'result': False,
             'response': serializer.errors,
         }, status=status.HTTP_400_BAD_REQUEST)
+
+
+class DemandForecastResultView(viewsets.ModelViewSet):
+    queryset = DemandForecastResultModel.objects.all()
+    serializer_class = DemandForecastResultSerializer
 
 
 class DemandForecastDetailView(APIView):

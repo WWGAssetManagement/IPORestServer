@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from .models import (
     DemandForecastModel,
+    DemandForecastResultModel,
     IPOScheduleModel,
     DCInsideTitleModel,
     DCInsideDetailModel,
@@ -20,6 +21,12 @@ class DemandForecastSerializer(serializers.ModelSerializer):
                   'hope_price_min',
                   'hope_price_max',
                   )
+
+
+class DemandForecastResultSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = DemandForecastResultModel
+        fields = '__all__'
 
 
 class IPOScheduleSerializer(serializers.ModelSerializer):

@@ -2,6 +2,7 @@ from django.urls import path, include
 from .views import (
     DemandForecastDetailView,
     DemandForecastView,
+    DemandForecastResultView,
     DemandForecastInProgressView,
     IPOScheduleView,
     IPOScheduleDetailView,
@@ -17,6 +18,7 @@ router.register('detail', DCInsideDetailView)
 
 demand_router = DefaultRouter()
 demand_router.register('forecast', DemandForecastView)
+demand_router.register('result', DemandForecastResultView)
 
 naver_router = DefaultRouter()
 demand_router.register('trend', NaverTrendSearchView)
