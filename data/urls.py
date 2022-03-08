@@ -21,7 +21,7 @@ demand_router.register('forecast', DemandForecastView)
 demand_router.register('result', DemandForecastResultView)
 
 naver_router = DefaultRouter()
-demand_router.register('trend', NaverTrendSearchView)
+naver_router.register('trend', NaverTrendSearchView)
 
 # 참고 사이트: https://berkbach.com/restful-api-in-django-16fc3fb1a238
 # 참고 사이트: https://proglish.tistory.com/53
