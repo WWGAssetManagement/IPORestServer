@@ -33,7 +33,7 @@ class DemandForecastResultModel(models.Model):
     ipo_value = models.IntegerField()
     institutional_competition_rate = models.FloatField()
     hold_rate = models.FloatField()
-    security = models.CharField(max_length=20)
+    security = models.CharField(max_length=40)
     hope_price_min = models.IntegerField()
     hope_price_max = models.IntegerField()
 
